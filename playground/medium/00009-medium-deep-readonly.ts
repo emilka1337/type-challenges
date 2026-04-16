@@ -36,7 +36,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type DeepReadonly<T> = any
+type DeepReadonly<T extends Record<PropertyKey, any>> = {
+  readonly [K in keyof T]: T[K] extends (...args: any[]) => any ? T[K] : T[K] extends Record<PropertyKey, any> ? DeepReadonly<T[K]> : T[K]
+}
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
