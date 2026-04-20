@@ -23,7 +23,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type AppendArgument<Fn, A> = any
+type AppendArgument<Fn extends (...args: any[]) => any, A> = (...args: [...Parameters<Fn>, A]) => ReturnType<Fn>
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
