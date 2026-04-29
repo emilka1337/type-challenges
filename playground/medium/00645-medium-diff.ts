@@ -12,7 +12,12 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Diff<O, O1> = any
+type Diff<
+  O extends Record<PropertyKey, any>,
+  O1 extends Record<PropertyKey, any>,
+> = {
+  [P in Exclude<keyof O | keyof O1, keyof O & keyof O1>]: P extends keyof O ? O[P] : O1[P]
+}
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
