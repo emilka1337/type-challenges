@@ -27,7 +27,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type Merge<F, S> = any
+type Merge<F extends Record<PropertyKey, any>, S extends Record<PropertyKey, any>> = {
+  [P in keyof F | keyof S]: P extends keyof S ? S[P] : F[P]
+}
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
